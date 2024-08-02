@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\AboutUs;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class AboutUsController extends Controller
 {
@@ -12,7 +13,31 @@ class AboutUsController extends Controller
      */
     public function index()
     {
-        return view('about-us.about-us');
+
+
+        $business_id = config('constants.business_id');
+
+        $perPage = 4;
+
+        $config = DB::table('config_text_about_us_in_ecommerces')
+            ->where('business_id', $business_id)
+            ->where('custom_main', '!=', 1)
+            ->paginate($perPage);
+
+        $config_text_main = DB::table('config_text_about_us_in_ecommerces')
+            ->where('business_id', $business_id)
+            ->where('custom_main', 1)
+            ->first();
+
+
+        $url_img = config('constants.url_img_local_host');
+        //dd($config, $url_img);
+
+        return view('about-us.about-us',
+            ['config'=> $config,
+             'config_text_main'=>$config_text_main,
+             'url_img' => $url_img,
+            ]);
     }
 
     /**

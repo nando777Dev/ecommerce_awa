@@ -6,7 +6,7 @@ return[
 
 
     // id para recuperar os dados e configurações do ecommerce
-    'business_id' =>  42,
+    'business_id' =>  env('BUSINESS_ID_ECOMMERCE'),
 
     /***
        url para acessar as imagens do carrossel
@@ -22,7 +22,7 @@ return[
     /***
       url das imagens de produtos
     ***/
-    //'url_img_produto' => "https://app.contetecnologia.com.br",
+    //'url_img_produto' => "https://app.contetecnologia.com.br/",
     'url_img_produto' => "http://127.0.0.1:8000",
     /***
         -- fim --
@@ -45,5 +45,16 @@ return[
 
     //url para acessar as fotos de destaque do ecommerce no localhost
     'url_img_local_host'=> "http://127.0.0.1:8000/uploads/ecommerce_destaque/",
+
+
+    //url para favicon
+    //'url_favicon' => "https://app.contetecnologia.com.br/uploads/ecommerce_fav/",
+       'url_favicon'=> "http://127.0.0.1:8000/uploads/ecommerce_fav/",
+
+
+    //url para logo
+
+    //'url_logo' => "https://app.contetecnologia.com.br/uploads/ecommerce_logo/",
+    'url_logo'=> "http://127.0.0.1:8000/uploads/ecommerce_logos/",
 
 ];

@@ -55,10 +55,16 @@
             </div>
         </div>
     </section>
+    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+        @csrf
+    </form>
+
 
 
     <!--Cart TAble-->
-    @if($itens->count() <= 0 )
+
+
+    @if($itemCount < 0 )
         <section id="cart" class="padding">
             <div class="container">
                 <h1>Seu carrinho está vazio</h1>
@@ -80,63 +86,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <h4 class="heading uppercase marginbottom15">Carrinho de compras</h4>
-                        {{--<div class="table-responsive">
-                            <table class="table">
-                                <thead>
-                                <tr>
-                                    <th class="uppercase">Imagem</th>
-                                    <th class="uppercase">Produto</th>
-                                    <th class="uppercase"></th>
-                                    <th class="uppercase">Preço</th>
-                                    <th class="uppercase">Quantidade</th>
-                                    <th class="uppercase">Valor total</th>
-                                    <th class="uppercase"></th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                @foreach($itens as $item)
-                                <tr>
 
-                                    <td style="width: 30%; height: 25%">
-                                        <img class="shopping-product" src="{{$url . $item['attributes']['image']}}" alt="your product" style="width: 50%; height: 10%">
-                                    </td>
-                                    <td class="product-name">
-                                        <h5>{{$item->name}}</h5>
-                                    </td>
-                                    <td>--}}{{--<p>Lorem Ipsum is simply dummy text of the <br>printing and typesetting industry.</p>--}}{{--</td>
-                                    <td class="price">
-                                        <h5>R${{ $item->price }}</h5>
-                                    </td>
-                                    <td>
-                                        <div class="input-group spinner">
-                                            <input type="number" name="quantidade" class="form-control" value="1">
-                                            <div class="input-group-btn-vertical">
-                                                <div class="btn"><i class="fa fa-angle-up"></i></div>
-                                                <div class="btn"><i class="fa fa-angle-down"></i></div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="price">
-                                        <h5>R$ Sub Total</h5>
-                                    </td>
-                                    <form action="{{ route('cart.remove') }}" method="POST">
-                                        @csrf
-                                      <td class="text-center">
-                                          <a class="btn-close" href="#.">
-                                              <i class="fa fa-close">
-
-                                              </i>
-                                          </a>
-                                          <input type="hidden" name="id" value="{{$item->id}}">
-                                          <button>X</button>
-                                      </td>
-
-                                    </form>
-                                </tr>
-                                @endforeach
-                                </tbody>
-                            </table>
-                        </div>--}}
                         <div class="table-responsive">
                             <table class="table">
                                 <thead>
@@ -152,21 +102,25 @@
                                 </thead>
                                 <tbody>
                                 @foreach($itens as $item)
+                                    @dd($item)
                                     <tr>
                                         <td style="width: 30%; height: 25%">
-                                            <img class="shopping-product" src="{{$url . $item['attributes']['image']}}" alt="your product" style="width: 50%; height: 10%">
+                                            <img class="shopping-product" src="{{$url . $item['image']}}" alt="your product" style="width: 50%; height: 10%">
                                         </td>
                                         <td class="product-name">
-                                            <h5>{{$item->name}}</h5>
+                                            <h5>{{$item['nome']}}</h5>
                                         </td>
                                         <td></td>
                                         <td class="price">
-                                            <h5>R$<span class="item-price">{{ number_format($item->price, 2, ',', '.') }}</span></h5>
+                                            <h5>R$<span class="item-price">{{ number_format($item['price'], 2, ',', '.') }}</span></h5>
                                         </td>
                                         <td>
                                             <div class="input-group spinner">
-                                                <input type="number" name="quantidade" min="1" class="form-control item-quantity" value="1" data-item-id="{{ $item->id }}">
+                                                <input type="text" name="quantidade" min="1" class="form-control item-quantity"  data-item-id="{{ $item['id_produto'] }}">
                                             </div>
+                                        </td>
+                                        <td>
+                                            <h1>teste</h1>
                                         </td>
                                         <td class="price">
                                             <h5>R$<span class="item-subtotal">0,00</span></h5>
@@ -174,11 +128,9 @@
                                         <form action="{{ route('cart.remove') }}" method="POST">
                                             @csrf
                                             <td class="text-center">
-                                                <a class="btn-close" href="#.">
-                                                    <i class="fa fa-close"></i>
-                                                </a>
-                                                <input type="hidden" name="id" value="{{$item->id}}">
-                                                <button>X</button>
+
+                                                <input type="hidden" name="id" value="{{$item['id_produto']}}">
+
                                             </td>
                                         </form>
                                     </tr>
@@ -282,17 +234,22 @@
         </section>
     @endif
 
+@endsection
+@section('javascript')
+    <script src="{{ asset('js/checkout.js') }}"></script>
 
 @endsection
 
-@section('javascript')
+{{--@section('javascript')
     <script type="text/javascript">
         $(document).ready(function() {
+
             function updateSubtotal(element) {
+
                 var quantity = parseFloat($(element).val());
                 var price = parseFloat($(element).closest('tr').find('.item-price').text().replace('.', '').replace(',', '.'));
                 var subtotal = quantity * price;
-
+                alert()
                 // Format subtotal to Brazilian currency
                 var subtotalFormatted = subtotal.toFixed(2).replace('.', ',');
 
@@ -346,4 +303,4 @@
     </script>
 
 
-@endsection
+@endsection--}}

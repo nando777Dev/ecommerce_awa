@@ -247,10 +247,10 @@ jQuery(function($) {'use strict';
 
  //Map
  $('#test')
-      .gmap3({
+      /*.gmap3({
         center:[48.8620722, 2.352047],
         zoom:4
-      })
+      })*/
       .marker([
         {position:[48.8620722, 2.352047]},
         {address:"86000 Poitiers, France"},

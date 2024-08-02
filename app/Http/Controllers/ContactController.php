@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
+use App\Mail\ContactMail;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
+
 
 class ContactController extends Controller
 {
@@ -11,7 +15,27 @@ class ContactController extends Controller
      */
     public function index()
     {
-        //
+        return view ('contact.index');
+    }
+
+    public function sendContactEmail(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|max:255',
+            'message' => 'required|string',
+        ]);
+
+        $details = [
+            'name' => $request->name,
+            'email' => $request->email,
+            'message' => $request->message,
+        ];
+        
+
+        Mail::to('envio@awadesign.com.br')->send(new ContactMail($details));
+
+        return back()->with('success', 'Sua mensagem foi enviada com sucesso!');
     }
 
     /**

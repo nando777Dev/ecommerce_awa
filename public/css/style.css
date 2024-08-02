@@ -161,7 +161,7 @@ h5{
 	font-size:14px;
 }
 p, .seller-slider .media-body .media-heading{
-	color:#606060;
+
 }
 .padding{
 	padding:90px 0;
@@ -1146,15 +1146,15 @@ header.right-menu .side .widget ul.link li a:focus, header.right-menu .side .wid
 .tag{
 	position:absolute;
 	top:0;
-	right:15px;
-	z-index:5;
+	right:45px;
+	z-index:1;
 }
 .tag .tag-btn{
   width: 0;
   height: 0;
   border-bottom:10px solid transparent;
-  border-top:50px solid #79b6c8;
-  border-left:15px solid #79b6c8;
+  border-top:55px solid #79b6c8;
+  border-left:25px solid #79b6c8;
   border-right:15px solid #79b6c8;
   display:inline-block;
 }
@@ -1162,8 +1162,8 @@ header.right-menu .side .widget ul.link li a:focus, header.right-menu .side .wid
     width: 0;
     height: 0;
     border-bottom:10px solid transparent;
-    border-top:50px solid #c8bb79;
-    border-left:15px solid #c8bb79;
+    border-top:60px solid #c8bb79;
+    border-left:25px solid #c8bb79;
     border-right:15px solid #c8bb79;
     display:inline-block;
 }
@@ -1190,7 +1190,7 @@ header.right-menu .side .widget ul.link li a:focus, header.right-menu .side .wid
   -o-transform: rotate(90deg);
   -webkit-transform: rotate(90deg);
   transform: rotate(90deg);
-  top:24px;
+  top:29px;
 }
 
 .tag-btn-destaque span{
@@ -1207,7 +1207,7 @@ header.right-menu .side .widget ul.link li a:focus, header.right-menu .side .wid
     -o-transform: rotate(90deg);
     -webkit-transform: rotate(90deg);
     transform: rotate(90deg);
-    top:24px;
+    top:29px;
 }
 
 .arrival_container{
@@ -1740,7 +1740,7 @@ form.newsletter .input-group-addon:hover{
   color:#79b6c8;
 }
 .header_layout2{
-	background:url(../images/newsler.jpg) no-repeat;
+
 }
 .header_layout2, .header_layout3{
 	background-position:center center;
@@ -2372,7 +2372,7 @@ input[type="number"] {
 /* ------------------ Footer  ------------------ */
 footer{
 	width:100%;
-	background:url(../images/pattern.jpg) no-repeat;
+	background-color: #201f1f;
 	background-size:cover;
 	background-position:center top;
 	color:#fff;

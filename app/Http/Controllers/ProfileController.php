@@ -21,6 +21,17 @@ class ProfileController extends Controller
         ]);
     }
 
+    public function show(Request $request): View
+    {
+
+        $user = Auth::user();
+        //dd($user);
+
+        return view('profile.partials.show', [
+            'user' => $request->user(),
+        ]);
+    }
+
     /**
      * Update the user's profile information.
      */

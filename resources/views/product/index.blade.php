@@ -71,7 +71,7 @@
         </div>
         <div class="col-md-9 col-sm-8">
             <div class="shop-grid-controls">
-                <div class="view-button grid active bottom30">
+                <div class="view-button grid bottom30">
                     <i class="fa fa-th-large"></i>
                 </div>
                 <div class="view-button list bottom30">
@@ -97,63 +97,74 @@
                     Nenhum resultado encontrado para a pesquisa.
                 </div>
             @else
-                <div class="row shop-grid grid-view">
+                <div class="row shop-grid list-view">
                     @foreach ($products as $product)
-                        <div class="col-md-4 col-sm-6">
-                            <div class="product_wrap heading_space">
-                                <div class="image">
-                                    @if ($product->novo)
-                                        <div class="tag">
-                                            <div class="tag-btn">
-                                                <span class="uppercase text-center">Novo</span>
-                                            </div>
+                    <div class="col-md-4 col-sm-6">
+                        <div class="product_wrap heading_space">
+                            <div class="image">
+                                @if ($product->novo)
+                                    <div class="tag">
+                                        <div class="tag-btn">
+                                            <span class="uppercase text-center">Novo</span>
                                         </div>
-                                    @endif
-                                    @if ($product->destaque)
-                                        <div class="tag">
-                                            <div class="tag-btn">
-                                                <span class="uppercase text-center">Destaque</span>
-                                            </div>
+                                    </div>
+                                @endif
+                                @if ($product->destaque)
+                                    <div class="tag">
+                                        <div class="tag-btn">
+                                            <span class="uppercase text-center">Destaque</span>
                                         </div>
-                                    @endif
-                                    <a class="fancybox size_img" href="{{ $url_img . $product->image }}" >
-                                        <img src="{{ $url_img . $product->image }}" alt="{{ $product->name_produto }}" class="img-responsive size_img" >
-                                    </a>
-                                </div>
-                                <div class="product_desc">
-                                    <a href="/produtos/show/ {{$product->id_produto}}" style="font-size: 12px">{{ $product->name_produto }}</a><br>
-                                    <div class="list_content margintop40">
-                                        <p class="bottom30">{{ $product->description }}</p>
-                                        <ul class="review_list bottomtop30">
-                                            {{-- <li><img alt="star" src="{{ asset('images/star.png') }}"></li>
-                                             <li><a href="#.">10 review(s)</a></li>--}}
-                                        </ul>
-                                        <h4 class="price bottom30">
+                                    </div>
+                                @endif
+                                <a class="fancybox size_img" href="{{ $url_img . $product->image }}" >
+                                    <img src="{{ $url_img . $product->image }}" alt="{{ $product->name_produto }}" class="img-responsive size_img" >
+                                </a>
+                            </div>
+                            <div class="product_desc">
+                                <a href="/produtos/show/{{ $product->id_produto }}" style="font-size: 12px">{{ $product->name_produto }}</a><br>
+                                <div class="list_content margintop40">
+                                    <p class="bottom30">{!! $product->description !!}</p>
+                                    <ul class="review_list bottomtop30">
+                                        {{-- <li><img alt="star" src="{{ asset('images/star.png') }}"></li>
+                                         <li><a href="#.">10 review(s)</a></li>--}}
+                                    </ul>
+                                    <p><u>Especificações</u> <small>em centímetros</small></p>
+                                    <p>Altura - {{ $product->altura }} </p>
+                                    <p>Comprimento - {{ $product->comprimento }}</p>
+                                    <p>Largura - {{ $product->largura }}</p>
+                                    <p>Peso - {{ $product->peso ?? '0.00' }} </p>
+                                    <br>
+                                    <h4 class="price bottom30">
+                                        &nbsp;<span class="discount"><i></i>R${{ number_format($product->price, 2, ',', '.') }}</span>
+                                    </h4>
 
-                                            &nbsp;<span class="discount"><i></i>R${{number_format($product->price, 2, ',', '.')  }}</span>
-                                        </h4>
+                                    @if ($product->stock > 0)
                                         <form action="{{ route('cart.add') }}" method="POST">
                                             <div class="cart-buttons">
                                                 @csrf
-                                                <input type="hidden" name="id_produto" value="{{ $product->id_produto}} ">
-                                                <input type="hidden" name="nome_produto" value="{{ $product->name_produto}} ">
-                                                <input type="hidden" name="price" value="{{ $product->price }} ">
-                                                <input type="hidden" name="img" value="{{ $product->image }} ">
+                                                <input type="hidden" name="id_produto" value="{{ $product->id_produto }}">
+                                                <input type="hidden" name="nome_produto" value="{{ $product->name_produto }}">
+                                                <input type="hidden" name="price" value="{{ $product->price }}">
+                                                <input type="hidden" name="img" value="{{ $product->image }}">
                                                 <input type="hidden" name="quantidade" value="1">
-
-                                                <button class="uppercase border-radius btn-dark" href="{{ route('cart.add', $product->id_produto) }}">
-                                                    <i class="fa fa-shopping-basket"></i> &nbsp; Adicione ao carrinho
+                                                <button class="uppercase border-radius btn-dark">
+                                                    <i class="fa fa-shopping-basket"></i> &nbsp; Adicionar ao carrinho
                                                 </button>
                                             </div>
                                         </form>
-                                    </div>
-                                    <span class="price"><i></i>R${{number_format($product->price, 2, ',', '.')  }}</span>
-                                    <a class="fancybox" href="{{ $url_img . $product->image }}" data-fancybox-group="gallery" style="width: 277px">
-                                    </a>
+                                    @else
+                                        <div class="out-of-stock-message" style="color: red; font-weight: bold;">
+                                            Produto sem estoque ou fabricado mediante a demanda!. Entre contato para orçamento e prazo de entrega!
+                                        </div>
+                                    @endif
                                 </div>
+                                <span class="price"><i></i>R${{ number_format($product->price, 2, ',', '.') }}</span>
+                                <a class="fancybox" href="{{ $url_img . $product->image }}" data-fancybox-group="gallery" style="width: 277px"></a>
                             </div>
                         </div>
-                    @endforeach
+                    </div>
+                @endforeach
+
                 </div>
                 <div class="row">
                     <div class="col-md-6 col-sm-6">

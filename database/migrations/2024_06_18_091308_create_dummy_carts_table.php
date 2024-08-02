@@ -1,0 +1,34 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
+    {
+        Schema::create('dummy_carts', function (Blueprint $table) {
+            $table->integer('business_id')->unsigned();
+            $table->integer('usuario_id')->unsigned();
+            $table->integer('id_produto')->unsigned();
+            $table->integer('transaction_id')->unsigned();
+            $table->string('nome', 255);
+            $table->double('price', 22,4);
+            $table->integer('quantity');
+            $table->string('image', 255);
+            $table->foreign('business_id')->references('id')->on('business');
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        Schema::dropIfExists('dummy_carts');
+    }
+};

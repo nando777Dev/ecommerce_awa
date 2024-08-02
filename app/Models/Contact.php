@@ -22,7 +22,7 @@ class Contact extends Authenticatable
      */
     protected $guarded = [];
 
-    protected $fillable = ['business_id', 'cpf_cnpj', 'datanasc', 'ie_rg', 'consumidor_final', 'contribuinte', 'rua', 'city_id', 'numero', 'bairro', 'cep', 'name', 'mobile', 'cod_pais', 'type', 'created_by'];
+    protected $fillable = ['business_id', 'cpf_cnpj', 'datanasc', 'ie_rg', 'consumidor_final', 'contribuinte', 'rua', 'city_id', 'numero', 'bairro', 'cep', 'name', 'mobile', 'cod_pais', 'type', 'created_by', 'user_id', 'customerId'];
 
 
     /**
